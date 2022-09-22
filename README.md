@@ -10,6 +10,7 @@ Run 'docker-compose up'
 
 This should get the container running, and when it tries to create the connection pool throws the following segfault error:
 
+```
 { poolAlias: 'segfault_prototype' } Creating connection pool
 my-service_1  | PID 15 received SIGSEGV for address: 0x0
 my-service_1  | /home/node/app/node_modules/segfault-handler/build/Release/segfault-handler.node(+0x2f56)[0x7fd50c046f56]
@@ -29,7 +30,7 @@ my-service_1  | /home/node/app/node_modules/oracledb/build/Release/oracledb-5.4.
 my-service_1  | node(+0x1146dc4)[0xe1e6f55dc4]
 my-service_1  | /lib64/libpthread.so.0(+0x81cf)[0x7fd5116dd1cf]
 my-service_1  | /lib64/libc.so.6(clone+0x43)[0x7fd511349dd3]
-
+```
 
 We are only seeing the error in this project when setting the EVENT_10842 environment variable to 15, if you set it to 11 and below we do not get the issue creating the connection pool.
 
