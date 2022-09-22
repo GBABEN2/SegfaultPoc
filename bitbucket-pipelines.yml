@@ -1,0 +1,31 @@
+pipelines:
+  branches:
+    master:
+    - step:
+        services:
+          - docker
+        caches:
+          - docker
+        script:
+          - git remote set-url origin ${BITBUCKET_GIT_SSH_ORIGIN}
+
+          - version_number="1.${BITBUCKET_BUILD_NUMBER}.0"
+          - full_image_name="${DOCKER_URL}/atrium/poc/segfault-minimal:${version_number}"
+          - docker login $DOCKER_URL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+
+          - docker build -t "${full_image_name}" --build-arg DOCKER_URL="${DOCKER_URL}" .
+          - docker push ${full_image_name}
+
+          - git tag "v${version_number}"
+          - git push origin "v${version_number}"
+
+  pull-requests:
+    '**':
+    - step:
+        services:
+          - docker
+        caches:
+          - docker
+        script:
+          - docker login $DOCKER_URL -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+          - docker build --build-arg DOCKER_URL="${DOCKER_URL}" .

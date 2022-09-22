@@ -1,0 +1,21 @@
+create or replace PACKAGE BODY GW_TESTPKG
+AS
+    PROCEDURE segfault_test 
+        ( p_lang_code                    IN       VARCHAR2
+        , p_number                           OUT  NUMBER
+        , p_varchar                          OUT  VARCHAR2
+        , p_date                             OUT  DATE
+        , p_output_clob                      OUT  genapi_nclob_wrapper_obj
+        , p_error_detail_out_obj             OUT  error_detail_out_obj ) 
+    IS
+                l_procedure_name               VARCHAR2(30)  := 'TEST_PACKAGE';
+                l_out_json_clob                nclob;
+    BEGIN
+        p_number := 10;
+        p_varchar := 'abc';
+        p_date := TO_DATE('31-DEC-4712','DD-MON-YYYY');
+        l_out_json_clob := '{ "data": { "policies": [] } }';
+        p_output_clob := genapi_nclob_wrapper_obj(l_out_json_clob);
+
+    END segfault_test;
+END GW_TESTPKG;

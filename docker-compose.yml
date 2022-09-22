@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  my-service: 
+    build:      
+      context: .
+    environment: 
+      - UV_THREADPOOL_SIZE=1
+      - DB_CONNECTION_STRING=
+      - DB_PASSWORD=
+      - DB_POOL_ALIAS=segfault_prototype
+      - DB_POOL_INCREMENT=1
+      - DB_POOL_MAX=5
+      - DB_POOL_MIN=3
+      - DB_USER=
+      - ORA_SDTZ=UTC
+      - LOG_SQL=true
+      - EVENT_10842=15

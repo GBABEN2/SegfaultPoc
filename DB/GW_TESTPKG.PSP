@@ -1,0 +1,10 @@
+create or replace PACKAGE GW_TESTPKG
+AS
+    PROCEDURE segfault_test 
+        ( p_lang_code                    IN       VARCHAR2
+        , p_number                           OUT  NUMBER
+        , p_varchar                          OUT  VARCHAR2
+        , p_date                             OUT  DATE
+        , p_output_clob                      OUT  genapi_nclob_wrapper_obj
+        , p_error_detail_out_obj             OUT  error_detail_out_obj ) ;
+END GW_TESTPKG;

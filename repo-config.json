@@ -1,0 +1,8 @@
+{
+    "dockerImages": [
+        {
+            "gw": "atrium/poc/segfault-minimal",
+            "atradius": "atrium/poc/segfault-minimal"
+        }
+    ]
+}
